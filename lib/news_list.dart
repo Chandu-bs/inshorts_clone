@@ -25,6 +25,7 @@ class NewsData extends ChangeNotifier {
   void nextNews() {
     if (_newsNumber < _newsData.length - 1) {
       _newsNumber++;
+      notifyListeners();
     }
   }
 

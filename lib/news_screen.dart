@@ -24,13 +24,23 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    String? swipeDirection;
     return Scaffold(
       body: SafeArea(
-        child: Listener(
-          onPointerMove: (moveEvent) {
-            if (moveEvent.delta.dx < 0) {
+        child: GestureDetector(
+          onPanUpdate: (details) {
+            swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
+          },
+          onPanEnd: (details) {
+            // if (swipeDirection == null) {
+            //   return ;
+            // }
+            if (swipeDirection == 'left') {
               _launchURL();
             }
+            // if (swipeDirection == 'right') {
+            //   //handle swipe right event
+            // }
           },
           child: PageView(
             scrollDirection: Axis.vertical,
@@ -81,10 +91,11 @@ class _NewsScreenState extends State<NewsScreen> {
 //                 }
 //               });
 
-_launchURL() async {
+Future<void> _launchURL() async {
   const url = 'https://fwd.wiki';
   if (await canLaunch(url)) {
-    await launch(url);
+    await launch(url,
+        forceSafariVC: true, forceWebView: true, enableJavaScript: true);
   } else {
     throw 'Could not launch $url';
   }
