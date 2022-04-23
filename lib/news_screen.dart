@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inshorts_clone/main.dart';
 import 'constants.dart';
 import 'newscard.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({Key? key}) : super(key: key);
@@ -27,8 +28,8 @@ class _NewsScreenState extends State<NewsScreen> {
       body: SafeArea(
         child: Listener(
           onPointerMove: (moveEvent) {
-            if (moveEvent.delta.dx > 0) {
-              print("swipe right");
+            if (moveEvent.delta.dx < 0) {
+              _launchURL();
             }
           },
           child: PageView(
@@ -71,40 +72,20 @@ class _NewsScreenState extends State<NewsScreen> {
 //       child: //child widget
 //     );
 
-// class LinkView extends StatefulWidget {
-//   const LinkView({Key? key}) : super(key: key);
+// setState(() async {
+//                 const url = 'https://fwd.wiki';
+//                 if (await canLaunch(url)) {
+//                   await launch(url);
+//                 } else {
+//                   throw 'Could not launch $url';
+//                 }
+//               });
 
-//   @override
-//   _LinkViewSwipe createState() => _LinkViewSwipe();
-// }
-
-// class _LinkViewSwipe extends State<NewsView> {
-//   final PageController _controller =
-//       PageController(initialPage: 0, viewportFraction: 1.0);
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return PageView(
-//       controller: _controller,
-//       scrollDirection: Axis.horizontal,
-//       children: [
-//         _launchURL,
-//       ],
-//     );
-//   }
-// }
-
-// _launchURL() async {
-//   const url = 'https://fwd.wiki';
-//   if (await canLaunch(url)) {
-//     await launch(url);
-//   } else {
-//     throw 'Could not launch $url';
-//   }
-// }
+_launchURL() async {
+  const url = 'https://fwd.wiki';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
