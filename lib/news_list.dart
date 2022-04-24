@@ -6,7 +6,7 @@ import 'package:inshorts_clone/news_class.dart';
 import 'package:inshorts_clone/news_screen.dart';
 import 'constants.dart';
 
-class NewsData extends ChangeNotifier {
+class NewsData {
   int _newsNumber = 0;
 
   final List<News> _newsData = [
@@ -25,7 +25,6 @@ class NewsData extends ChangeNotifier {
   void nextNews() {
     if (_newsNumber < _newsData.length - 1) {
       _newsNumber++;
-      notifyListeners();
     }
   }
 

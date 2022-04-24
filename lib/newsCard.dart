@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'news_list.dart';
 
 class NewsCard extends StatefulWidget {
-  const NewsCard({
+  NewsCard({
     Key? key,
     required this.size,
+    required this.headings,
+    this.info,
   }) : super(key: key);
 
   final Size size;
+  final String headings;
+  final info;
 
   @override
   State<NewsCard> createState() => _NewsCardState();
 }
 
 class _NewsCardState extends State<NewsCard> {
+  String headings = '';
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -27,21 +34,21 @@ class _NewsCardState extends State<NewsCard> {
           ),
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.all(15.0),
+      Padding(
+        padding: const EdgeInsets.all(15.0),
         child: Text(
-          heading,
-          style: TextStyle(
+          headings,
+          style: const TextStyle(
             color: kTextColor,
             fontSize: 25.0,
           ),
         ),
       ),
-      const Padding(
-        padding: EdgeInsets.all(15.0),
+      Padding(
+        padding: const EdgeInsets.all(15.0),
         child: Text(
           details,
-          style: TextStyle(
+          style: const TextStyle(
             color: kTextColor,
             fontSize: 18.0,
           ),

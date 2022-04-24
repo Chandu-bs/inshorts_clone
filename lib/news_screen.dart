@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inshorts_clone/main.dart';
+import 'package:inshorts_clone/newsCard.dart';
 import 'constants.dart';
-import 'newscard.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> _launchURL() async {
@@ -58,15 +59,9 @@ class _NewsScreenState extends State<NewsScreen> {
             scrollDirection: Axis.vertical,
             controller: _controller,
             children: [
-              NewsCard(
-                size: size,
-              ),
-              NewsCard(
-                size: size,
-              ),
-              NewsCard(
-                size: size,
-              ),
+              NewsCard(size: size, headings: kHeading, info: kDetails),
+              NewsCard(size: size, headings: kheading2, info: kDetails2),
+              NewsCard(size: size, headings: kheading3, info: kDetails3),
             ],
           ),
         ),
