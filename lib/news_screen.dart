@@ -4,6 +4,16 @@ import 'constants.dart';
 import 'newscard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+Future<void> _launchURL() async {
+  const url = 'https://www.news18.com/';
+  if (await canLaunch(url)) {
+    await launch(url,
+        forceSafariVC: true, forceWebView: true, enableJavaScript: true);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
 class NewsScreen extends StatefulWidget {
   const NewsScreen({Key? key}) : super(key: key);
 
@@ -36,7 +46,9 @@ class _NewsScreenState extends State<NewsScreen> {
             //   return ;
             // }
             if (swipeDirection == 'left') {
-              _launchURL();
+              setState(() {
+                _launchURL();
+              });
             }
             // if (swipeDirection == 'right') {
             //   //handle swipe right event
@@ -60,43 +72,5 @@ class _NewsScreenState extends State<NewsScreen> {
         ),
       ),
     );
-  }
-}
-
-// String? swipeDirection;
-// GestureDetector(
-//       onPanUpdate: (details) {
-//         swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
-//       },
-//       onPanEnd: (details) {
-//         if (swipeDirection == null) {
-//           return ;
-//         }
-//         if (swipeDirection == 'left') {
-//           //handle swipe left event
-//         }
-//         if (swipeDirection == 'right') {
-//           //handle swipe right event
-//         }
-//       },
-//       child: //child widget
-//     );
-
-// setState(() async {
-//                 const url = 'https://fwd.wiki';
-//                 if (await canLaunch(url)) {
-//                   await launch(url);
-//                 } else {
-//                   throw 'Could not launch $url';
-//                 }
-//               });
-
-Future<void> _launchURL() async {
-  const url = 'https://fwd.wiki';
-  if (await canLaunch(url)) {
-    await launch(url,
-        forceSafariVC: true, forceWebView: true, enableJavaScript: true);
-  } else {
-    throw 'Could not launch $url';
   }
 }
