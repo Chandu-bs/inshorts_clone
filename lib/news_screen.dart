@@ -59,9 +59,34 @@ class _NewsScreenState extends State<NewsScreen> {
             scrollDirection: Axis.vertical,
             controller: _controller,
             children: [
-              NewsCard(size: size, headings: kHeading, info: kDetails),
-              NewsCard(size: size, headings: kheading2, info: kDetails2),
-              NewsCard(size: size, headings: kheading3, info: kDetails3),
+              NewsCard(
+                size: size,
+                headings: kHeading,
+                info: kDetails,
+                image: kImage1,
+              ),
+              NewsCard(
+                size: size,
+                headings: kheading2,
+                info: kDetails2,
+                image: kImage2,
+              ),
+              NewsCard(
+                size: size,
+                headings: kheading3,
+                info: kDetails3,
+                image: kImage3,
+              ),
+              NewsCard(
+                  size: size,
+                  headings: kheading4,
+                  info: kDetails4,
+                  image: kImage4),
+              NewsCard(
+                  size: size,
+                  headings: kheading5,
+                  info: kDetails5,
+                  image: kImage5),
             ],
           ),
         ),
