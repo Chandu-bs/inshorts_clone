@@ -19,7 +19,7 @@ class NewsDataCard extends ChangeNotifier {
 
   void updatePosition(DragUpdateDetails details) {
     swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
-    // scrollDirection = details.delta.dy < 0 ? 'top' : 'bottom';
+    // scrollDirection = details.delta.dy < 0 ? 'top' : 'bottom'; //(This will make scroll in top and bottom)
     if (swipeDirection == 'left') {
       _launchURL();
     }
