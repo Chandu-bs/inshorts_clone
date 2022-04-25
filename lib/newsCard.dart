@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'news_list.dart';
@@ -40,6 +41,7 @@ class _NewsCardState extends State<NewsCard> {
           style: const TextStyle(
             color: kTextColor,
             fontSize: 25.0,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
