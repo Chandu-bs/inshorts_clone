@@ -5,18 +5,6 @@ import 'package:inshorts_clone/provider/card_provider.dart';
 import 'constants.dart';
 import 'package:provider/provider.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
-Future<void> _launchURL() async {
-  const url = 'https://www.news18.com/';
-  if (await canLaunch(url)) {
-    await launch(url,
-        forceSafariVC: true, forceWebView: true, enableJavaScript: true);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
 class NewsScreen extends StatefulWidget {
   const NewsScreen({Key? key}) : super(key: key);
 
@@ -42,21 +30,12 @@ class _NewsScreenState extends State<NewsScreen> {
       body: SafeArea(
         child: SizedBox.expand(
           child: GestureDetector(
-            // onPanStart: (details) {
-            //   final provider =
-            //       Provider.of<NewsDataCard>(context, listen: false);
-            //   provider.startPosition(details);
-            // },
             onPanUpdate: (details) {
+              swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
               final provider =
                   Provider.of<NewsDataCard>(context, listen: false);
-              provider.updatePosition(details);
+              provider.updatePosition(details, context);
             },
-            // onPanEnd: (details) {
-            //   final provider =
-            //       Provider.of<NewsDataCard>(context, listen: false);
-            //   provider.endPosition();
-            // },
             child: PageView(
                 controller: _controller,
                 scrollDirection: Axis.vertical,
