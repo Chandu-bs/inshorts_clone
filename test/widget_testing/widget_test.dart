@@ -1,4 +1,5 @@
 // import 'package:integration_test/integration_test.dart';
+
 import 'package:flutter/material.dart';
 import 'package:inshorts_clone/constants.dart';
 import 'package:inshorts_clone/main.dart';
@@ -58,12 +59,6 @@ void main() {
 
   test(
     "test page view vertical swipe",
-    () async {
-      final SerializableFinder pv = find.byValuekey(Pv);
-
-      await driver.waitFor(pv);
-      await driver.scroll(pv, 0, -600, Duration(milliseconds: 500));
-      await driver.getText(find.text('MS Dhoni'));
-    },
+    () async {},
   );
 }
