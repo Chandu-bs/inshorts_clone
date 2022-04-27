@@ -27,6 +27,7 @@ class _NewsScreenState extends State<NewsScreen> {
     var size = MediaQuery.of(context).size;
     String? swipeDirection;
     return Scaffold(
+      key: scaffold,
       body: SafeArea(
         child: SizedBox.expand(
           child: GestureDetector(

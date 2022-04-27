@@ -42,7 +42,6 @@ String kHeading9 = "COVID-19 was 3rd leading cause of death in US in 2021: CDC";
 String kHeading10 =
     "Want Asian countries to change attitude towards Ukraine: Zelenskyy";
 
-
 // Details
 
 String kDetails =
@@ -69,4 +68,7 @@ String kDetails9 =
 String kDetails10 =
     "Ukrainian President Volodymyr Zelenskyy has said that he wanted the Asian countries, many of which haven't voted against Russia's attack on various global platforms, to change their attitude. Stating that the European countries first underestimated Ukraine but their attitude changed later, Zelenskyy added, 'I very much want the Asian countries to change their attitude to Ukraine as well.'";
 
+// Keys
 
+const scaffold = Key('Scaffold_key');
+const HL = Key('headline_text');

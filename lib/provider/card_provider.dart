@@ -50,16 +50,3 @@ class NewsDataCard extends ChangeNotifier {
 
   void endPosition() {}
 }
-
-
-// onPanEnd: (details) {
-            //   final provider =
-            //       Provider.of<NewsDataCard>(context, listen: false);
-            //   provider.endPosition();
-            // },
-
-// onPanStart: (details) {
-            //   final provider =
-            //       Provider.of<NewsDataCard>(context, listen: false);
-            //   provider.startPosition(details);
-            // },
