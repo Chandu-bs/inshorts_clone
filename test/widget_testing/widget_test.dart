@@ -4,8 +4,6 @@ import 'package:inshorts_clone/constants.dart';
 import 'package:inshorts_clone/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:inshorts_clone/newsCard.dart';
-import 'package:inshorts_clone/news_class.dart';
-import 'package:inshorts_clone/constants.dart';
 import 'package:inshorts_clone/news_screen.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
@@ -43,6 +41,29 @@ void main() {
       final textFinder = find.byKey(HL);
 
       expect(find.text(kHeading), findsOneWidget);
+    },
+  );
+
+// Checking the Text widget in the Details
+  testWidgets(
+    "finding the headline in UI",
+    (WidgetTester tester) async {
+      await tester.pumpWidget(MyApp());
+
+      expect(find.text(kDetails), findsOneWidget);
+    },
+  );
+
+//to test the vertical swipe of the app
+
+  test(
+    "test page view vertical swipe",
+    () async {
+      final SerializableFinder pv = find.byValuekey(Pv);
+
+      await driver.waitFor(pv);
+      await driver.scroll(pv, 0, -600, Duration(milliseconds: 500));
+      await driver.getText(find.text('MS Dhoni'));
     },
   );
 }

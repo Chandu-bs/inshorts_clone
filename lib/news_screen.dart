@@ -38,6 +38,7 @@ class _NewsScreenState extends State<NewsScreen> {
               provider.updatePosition(details, context);
             },
             child: PageView(
+                key: Pv,
                 controller: _controller,
                 scrollDirection: Axis.vertical,
                 children: [
