@@ -74,3 +74,4 @@ const scaffold = Key('Scaffold_key');
 const HL = Key('headline_text');
 const DL = Key('details_text');
 const Pv = Key('page_view');
+const Gs = Key('Gesture');

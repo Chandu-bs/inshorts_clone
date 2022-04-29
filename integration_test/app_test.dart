@@ -13,38 +13,33 @@ void main() {
       //Arrange
       app.main();
       await tester.pumpAndSettle();
-      Widget testWidget() => MaterialApp(
-            home: Scaffold(
-              body: SafeArea(
-                child: Container(
-                  width: 200.0,
-                  height: 200.0,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: kImage1,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
-      final expectedWidget = find.text("President");
 
       // Act
       await Future.delayed(const Duration(seconds: 3));
-      await tester.drag(find.byType(PageView), const Offset(0, -750));
+      await tester.drag(find.byType(PageView), const Offset(0, -660));
       await tester.pumpAndSettle();
       await Future.delayed(const Duration(seconds: 3));
+      await tester.drag(find.byKey(Gs), const Offset(800, 0));
+      await Future.delayed(const Duration(seconds: 4));
+      await Future.delayed(const Duration(seconds: 6));
 
-      // //Assert
-      // expect(find.byKey(Pv), findsOneWidget);
-      // await Future.delayed(const Duration(seconds: 3));
-      // await tester.dragUntilVisible(
-      //   expectedWidget, // what you want to find
-      //   find.byType(PageView), // widget you want to scroll
-      //   const Offset(0, -100), // delta to move
-      // );
-      // await Future.delayed(const Duration(seconds: 5));
+      expect(find.text(kHeading2), findsOneWidget);
     },
   );
+
+// testWidgets(
+//     "Testing the Swipe function",
+//     (WidgetTester tester) async {
+//       //Arrange
+//       app.main();
+//       await Future.delayed(const Duration(seconds: 3));
+//       await tester.drag(find.byType(GestureDetector), const Offset(490, 0));
+//       await tester.pumpAndSettle();
+//       await Future.delayed(const Duration(seconds: 3));
+
+//       final text = find.text('hindustantimes.com');
+
+//       expect(text, findsOneWidget);
+//     },
+//   );
 }

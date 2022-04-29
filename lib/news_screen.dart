@@ -31,6 +31,7 @@ class _NewsScreenState extends State<NewsScreen> {
       body: SafeArea(
         child: SizedBox.expand(
           child: GestureDetector(
+            key: const Key('Gesture'),
             onPanUpdate: (details) {
               swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
               final provider =
