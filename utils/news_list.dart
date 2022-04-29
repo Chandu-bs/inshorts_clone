@@ -2,9 +2,9 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:inshorts_clone/constants.dart';
-import 'package:inshorts_clone/news_class.dart';
+import 'news_class.dart';
 import 'package:inshorts_clone/news_screen.dart';
-import 'constants.dart';
+import '../lib/constants.dart';
 
 class NewsData extends ChangeNotifier {
   int _newsNumber = 0;

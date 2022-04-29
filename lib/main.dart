@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inshorts_clone/news_list.dart';
+
 import 'package:inshorts_clone/provider/card_provider.dart';
 import 'constants.dart';
 import 'news_screen.dart';

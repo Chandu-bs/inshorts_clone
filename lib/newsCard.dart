@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
-import 'news_list.dart';
 
 class NewsCard extends StatefulWidget {
   const NewsCard({
