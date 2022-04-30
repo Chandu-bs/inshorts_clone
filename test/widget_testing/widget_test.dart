@@ -1,7 +1,5 @@
 // import 'package:integration_test/integration_test.dart';
 
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:inshorts_clone/constants.dart';
 import 'package:inshorts_clone/main.dart';
@@ -105,70 +103,48 @@ void main() {
     expect(text.style?.fontWeight, FontWeight.bold);
   });
 
-//to test the vertical swipe of the app
-  // testWidgets(
-  //   "Testing the scroll function of Pageview widget",
-  //   (WidgetTester tester) async {
-  //     await tester.dragUntilVisible(
-  //       expectedWidget, // what you want to find
-  //       find.byType(PageView), // widget you want to scroll
-  //       const Offset(0, -750), // delta to move
-  //     );
-  //   },
-  // );
+  testWidgets(
+    "check the scrolling of page view widget",
+    (WidgetTester tester) async {
+      await tester.pumpWidget(MyApp());
+      await Future.delayed(const Duration(seconds: 3));
+      await tester.drag(find.byType(PageView), const Offset(0, -670));
+      await Future.delayed(const Duration(seconds: 3));
+      await tester.pumpAndSettle();
 
-  // testWidgets(
-  //   "check the scrolling of page view widget",
-  //   (WidgetTester tester) async {
-  //     await tester.pumpWidget(MyApp());
-  //     await Future.delayed(const Duration(seconds: 3));
-  //     await tester.drag(find.byType(PageView), const Offset(0, -670));
-  //     await Future.delayed(const Duration(seconds: 3));
-  //     await tester.pumpAndSettle();
-
-  //     expect(find.text(kHeading2), findsOneWidget);
-  //   },
-  // );
+      expect(find.text(kHeading2), findsOneWidget);
+    },
+  );
 
 // Testing the swipe action
-  testWidgets("Pan doesn't crash", (WidgetTester tester) async {
-    String? swipeDirection;
 
-    _launchURL() async {
-      const url = 'https://www.hindustantimes.com';
-      if (await canLaunch(url)) {
-        await launch(url);
-      } else {
-        throw 'Could not launch $url';
+  testWidgets(
+    "Pan swipe to left checking",
+    (WidgetTester tester) async {
+      Future<void> _launchURL() async {
+        const url = 'https://www.hindustantimes.com';
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Could not launch $url';
+        }
       }
-    }
 
-    void updatePosition(DragUpdateDetails details) {
-      swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
-      // scrollDirection = details.delta.dy < 0 ? 'top' : 'bottom'; //(This will make scroll in top and bottom)
-      if (swipeDirection == 'left') {
-        _launchURL();
-      }
-    }
-
-    await tester.pumpWidget(SizedBox.expand(
-      child: GestureDetector(
-        onPanUpdate: (
-          DragUpdateDetails details,
-        ) {
-          updatePosition(details);
+      Offset? panDelta;
+      await tester.pumpWidget(GestureDetector(
+        onPanUpdate: (DragUpdateDetails details) {
+          panDelta = details.delta;
+          print('Swiped to left');
+          if (panDelta!.dx == 0) {
+            print('Swiped to left');
+          } else {
+            _launchURL();
+          }
         },
-        child: Container(),
-      ),
-    ));
-    await tester.pump();
-
-    expect(swipeDirection, isNull);
-
-    // await tester.dragFrom(const Offset(250, 350), const Offset(850, 350));
-    await tester.drag(find.byKey(Gs), const Offset(500, 0));
-    await Future.delayed(const Duration(seconds: 6));
-
-    expect(swipeDirection, 'left');
-  });
+      ));
+      // await tester.dragFrom(const Offset(200, 0.0), const Offset(440.0, 0.0));
+      await tester.drag(find.byType(GestureDetector), const Offset(440, 0));
+      expect(panDelta!.dx, 420.0);
+    },
+  );
 }
