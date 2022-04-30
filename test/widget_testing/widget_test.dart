@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:inshorts_clone/constants.dart';
 import 'package:inshorts_clone/main.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:inshorts_clone/provider/card_provider.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Widget makeTestableWidget() => MaterialApp(
@@ -147,4 +145,46 @@ void main() {
       expect(panDelta!.dx, 420.0);
     },
   );
+  testWidgets("Pan working check", (WidgetTester tester) async {
+    String? swipeDirection;
+
+    Future<void> _launchURL() async {
+      const url = 'https://www.hindustantimes.com';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
+
+    void updatePosition(DragUpdateDetails details) {
+      swipeDirection = details.delta.dx < 0 ? 'left' : 'right';
+      if (swipeDirection == 'left') {
+        _launchURL();
+      }
+    }
+
+    await tester.pumpWidget(
+      GestureDetector(
+        onPanUpdate: (
+          DragUpdateDetails details,
+        ) {
+          updatePosition(details);
+        },
+      ),
+    );
+    await tester.pump();
+    await Future.delayed(const Duration(seconds: 5));
+
+    expect(swipeDirection, isNull);
+
+    // await tester.dragFrom(const Offset(250, 350), const Offset(850, 350));
+    await tester.drag(
+      find.byType(GestureDetector),
+      const Offset(-440, 0),
+    );
+    await Future.delayed(const Duration(seconds: 6));
+
+    expect(swipeDirection, 'left');
+  });
 }
