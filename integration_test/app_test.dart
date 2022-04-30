@@ -35,17 +35,16 @@ void main() {
     await tester.drag(find.byType(PageView), const Offset(0, 660));
     await Future.delayed(const Duration(seconds: 3));
 
-    await tester.pumpWidget(GestureDetector(
-      onPanUpdate: (DragUpdateDetails details) {
-        panDelta = details.delta;
-        print('Swiped to left');
-        if (panDelta!.dx == 0) {
-          print('Swiped to left');
-        } else {
-          _launchURL();
-        }
-      },
-    ));
+    await tester.pumpWidget(
+      GestureDetector(
+        onPanUpdate: (
+          DragUpdateDetails details,
+        ) {
+          updatePosition(details);
+        },
+      ),
+    );
+    await tester.pumpAndSettle();
     expect(swipeDirection, isNull);
 
     await tester.drag(find.byType(GestureDetector), const Offset(-440, 0));
